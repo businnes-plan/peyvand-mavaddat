@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
-    // مدیریت فیلدهای شرطی
+    // ========== مدیریت فیلدهای شرطی ==========
     const physicalStatus = document.getElementById('physicalStatus');
     const disabilityContainer = document.getElementById('disabilityContainer');
     if (physicalStatus) {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // تبدیل تاریخ شمسی به میلادی (برای محاسبه سن)
+    // ========== توابع کمکی ==========
     function convertPersianToGregorian(year, month, day) {
         let gYear = parseInt(year) - 621;
         let gMonth = parseInt(month) + 3;
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return /^09[0-9]{9}$/.test(phone);
     }
 
+    // ========== دریافت اطلاعات فرم ==========
     function getFormData() {
         return {
             gender: document.getElementById('gender')?.value || '',
@@ -118,8 +119,10 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
         previewDiv.style.display = 'block';
     }
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/TOKEN_AT/exec"; // ← لینک خودتو اینجا بذار
+    // ========== لینک Web App (این رو با لینک خودت جایگزین کن) ==========
+    const WEB_APP_URL = "https://script.google.com/macros/s/YOUR_TOKEN/exec";
 
+    // ========== ثبت اطلاعات ==========
     function submitFormData(formData) {
         const age = calculateAge(formData.birthYear, formData.birthMonth, formData.birthDay);
         if (age < 18) return showMessage('❌ سن باید حداقل ۱۸ سال باشد!', true);
@@ -130,10 +133,11 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ action: 'saveUserData', data: JSON.stringify(formData) })
+            body: new URLSearchParams({ data: JSON.stringify(formData) })
         }).then(() => {
             showMessage('✅ اطلاعات شما با موفقیت ثبت شد!', false);
             document.getElementById('userInfoForm').reset();
+            document.getElementById('previewData').style.display = 'none';
         }).catch(() => showMessage('❌ خطا در ارتباط با سرور', true));
         
         showPreview(formData);
@@ -144,13 +148,13 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
         e.preventDefault();
         submitFormData(getFormData());
     });
-
-    // نمایش لیست کاربران
+// ========== نمایش لیست کاربران برای عموم ==========
     const viewBtn = document.getElementById('viewUsersBtn');
     const listContainer = document.getElementById('usersListContainer');
     const usersDiv = document.getElementById('usersList');
     const closeBtn = document.getElementById('closeUsersList');
-function loadUsers() {
+
+    function loadUsers() {
         usersDiv.innerHTML = '<div>در حال بارگذاری...</div>';
         listContainer.style.display = 'block';
         fetch(${WEB_APP_URL}?action=getPublicUsers)
@@ -184,7 +188,82 @@ function loadUsers() {
     viewBtn?.addEventListener('click', loadUsers);
     closeBtn?.addEventListener('click', () => listContainer.style.display = 'none');
 
-    // شماره تماس فقط عدد
+    // ========== پنل ادمین ==========
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminLoginBox = document.getElementById('adminLoginBox');
+    const submitAdminLogin = document.getElementById('submitAdminLogin');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminUsersList = document.getElementById('adminUsersList');
+    const closeAdminPanel = document.getElementById('closeAdminPanel');
+    const adminMessage = document.getElementById('adminMessage');
+    const adminPasswordInput = document.getElementById('adminPassword');
+
+    if (adminLoginBtn) {
+        adminLoginBtn.addEventListener('click', function() {
+            adminLoginBox.style.display = 'block';
+            adminPanel.style.display = 'none';
+            if (adminMessage) adminMessage.innerHTML = '';
+            if (adminPasswordInput) adminPasswordInput.value = '';
+        });
+    }
+
+    if (submitAdminLogin) {
+        submitAdminLogin.addEventListener('click', function() {
+            const password = adminPasswordInput.value;
+            if (!password) {
+                if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">لطفاً رمز را وارد کنید</span>';
+                return;
+            }
+            
+            if (adminMessage) adminMessage.innerHTML = '<span style="color:blue;">در حال بررسی...</span>';
+            
+            fetch(${WEB_APP_URL}?action=getAdminData&password=${encodeURIComponent(password)})
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">' + data.error + '</span>';
+                        if (adminPanel) adminPanel.style.display = 'none';
+                        return;
+                    }
+                    
+                    if (!data.length) {
+                        if (adminUsersList) adminUsersList.innerHTML = '<div>هیچ کاربری ثبت نشده است</div>';
+} else {
+                        let html = '';
+                        for (let i = 0; i < data.length; i++) {
+                            const u = data[i];
+                            html += 
+                                <div class="user-card">
+                                    <div class="user-code">🔹 ${u.code || 'کاربر'}</div>
+                                    <p>👤 اسم: ${u.firstName || '-'} ${u.lastName || '-'}</p>
+                                    <p>🧑 جنسیت: ${u.gender || '-'}</p>
+                                    <p>📍 شهر: ${u.city || '-'}</p>
+                                    <p>📞 شماره تماس ۱: ${u.phone1 || '-'}</p>
+                                    <p>📞 شماره تماس ۲: ${u.phone2 || '-'}</p>
+                                    <p>🆔 ایتا: ${u.eitaaId || '-'}</p>
+                                </div>
+                            ;
+                        }
+                        if (adminUsersList) adminUsersList.innerHTML = html;
+                    }
+                    if (adminPanel) adminPanel.style.display = 'block';
+                    if (adminLoginBox) adminLoginBox.style.display = 'none';
+                    if (adminMessage) adminMessage.innerHTML = '';
+                })
+                .catch(error => {
+                    if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">خطا در ارتباط با سرور</span>';
+                    console.error('Error:', error);
+                });
+        });
+    }
+
+    if (closeAdminPanel) {
+        closeAdminPanel.addEventListener('click', function() {
+            if (adminPanel) adminPanel.style.display = 'none';
+        });
+    }
+
+    // ========== شماره تماس فقط عدد ==========
     ['phone1', 'phone2'].forEach(id => {
         const inp = document.getElementById(id);
         inp?.addEventListener('input', function () {

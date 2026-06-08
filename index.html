@@ -360,7 +360,24 @@
         
         <!-- دکمه مشاهده کاربران -->
         <button type="button" id="viewUsersBtn" class="btn-view-users">👥 مشاهده کاربران</button>
-<!-- بخش نمایش لیست کاربران -->
+<!-- دکمه ورود ادمین -->
+        <button type="button" id="adminLoginBtn" class="btn-admin-login">🔐 ورود ادمین</button>
+
+        <!-- باکس ورود رمز ادمین (مخفی در ابتدا) -->
+        <div id="adminLoginBox" style="display:none;" class="admin-login-box">
+            <input type="password" id="adminPassword" placeholder="رمز ادمین را وارد کنید">
+            <button type="button" id="submitAdminLogin">تأیید</button>
+            <div id="adminMessage"></div>
+        </div>
+
+        <!-- بخش نمایش اطلاعات ادمین (مخفی در ابتدا) -->
+        <div id="adminPanel" style="display:none;" class="admin-panel">
+            <h3>👑 پنل مدیریت - اطلاعات کامل کاربران</h3>
+            <div id="adminUsersList" class="users-list"></div>
+            <button type="button" id="closeAdminPanel" class="btn-close">❌ بستن پنل ادمین</button>
+        </div>
+
+        <!-- بخش نمایش لیست کاربران برای عموم -->
         <div id="usersListContainer" class="users-list-container" style="display: none;">
             <h3>📋 لیست کاربران همسریابی</h3>
             <div id="usersList" class="users-list"></div>

@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -15,14 +16,15 @@ body {
 .form-container {
     max-width: 900px;
     margin: 0 auto;
-    background: white;
+    background: #ffffff;
     border-radius: 32px;
-    box-shadow: 0 25px 50px -12px black;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .form-header {
-    background: linear-gradient(135deg, #0a4c6e, #0a3b5e);
+    background: linear-gradient(135deg, #0a4c6e 0%, #0a3b5e 100%);
     color: white;
     padding: 30px 25px;
     text-align: center;
@@ -31,6 +33,13 @@ body {
 .form-header h1 {
     font-size: 1.8rem;
     margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.form-header p {
+    font-size: 0.9rem;
+    opacity: 0.85;
 }
 
 .register-form {
@@ -63,6 +72,7 @@ body {
 
 .required-star {
     color: #e74c3c;
+    font-size: 1rem;
 }
 
 .field-group input,
@@ -211,6 +221,71 @@ footer {
     font-size: 0.75rem;
     color: #5a6874;
     border-top: 1px solid #e2e8f0;
+}
+/* استایل دکمه ورود ادمین */
+.btn-admin-login {
+    width: 100%;
+    padding: 12px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-admin-login:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+}
+
+/* باکس ورود رمز ادمین */
+.admin-login-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f1f5f9;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.admin-login-box input {
+    width: 70%;
+    padding: 10px;
+    border: 2px solid #cbd5e0;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+.admin-login-box button {
+    padding: 10px 20px;
+    background: #0a6e8a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* پنل ادمین */
+.admin-panel {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 2px solid #d1d5db;
+}
+
+.admin-panel h3 {
+    color: #b91c1c;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.admin-panel .user-card {
+    background: white;
+    border-right: 4px solid #b91c1c;
 }
 
 @media (max-width: 640px) {
