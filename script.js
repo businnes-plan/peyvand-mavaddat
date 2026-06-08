@@ -120,7 +120,7 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
     }
 
     // ========== لینک Web App (این رو با لینک خودت جایگزین کن) ==========
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxGlwPDy5cO5K4o79iL-D3td8ClCEXiWztBvR9F06xEMl8Jl0Ndi2Sh6AELY0Fs4VAZ9w/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcNCoZd8DzXcArQBzMBAdGiN1UtBg295n5r2bos_873Jzw2gMASBrxuMZP_ZbaRmEdbQ/exec";
 
     // ========== ثبت اطلاعات ==========
     function submitFormData(formData) {
