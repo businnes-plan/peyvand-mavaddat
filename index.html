@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیوند مودت | سامانه ثبت اطلاعات همسرگزینی</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>🌿 پیوند مودت</h1>
+        <p>ثبت مشخصات برای همسریابی هدفمند و آگاهانه</p>
+    </div>
+    
+    <form id="userInfoForm" class="register-form">
+        <!-- جنسیت -->
+        <div class="field-group">
+            <label>🧑 جنسیت <span class="required-star">*</span></label>
+            <select id="gender" required>
+                <option value="" disabled selected>— انتخاب کنید —</option>
+                <option value="مرد">مرد</option>
+                <option value="زن">زن</option>
+            </select>
+        </div>
+
+        <div class="row-2col">
+            <div class="field-group">
+                <label>📛 نام <span class="required-star">*</span></label>
+                <input type="text" id="firstName" placeholder="مثال: رضا" required>
+            </div>
+            <div class="field-group">
+                <label>👨‍👩‍👧 نام خانوادگی <span class="required-star">*</span></label>
+                <input type="text" id="lastName" placeholder="مثال: کریمی" required>
+            </div>
+        </div>
+
+        <!-- تاریخ تولد شمسی -->
+        <div class="field-group">
+            <label>🎂 تاریخ تولد (شمسی) <span class="required-star">*</span></label>
+            <div class="row-3col">
+                <input type="number" id="birthYear" placeholder="سال" min="1300" max="1405" required>
+                <input type="number" id="birthMonth" placeholder="ماه" min="1" max="12" required>
+                <input type="number" id="birthDay" placeholder="روز" min="1" max="31" required>
+            </div>
+            <small style="color:#666; font-size:0.7rem;">مثال: ۱۳۷۵ / ۰۵ / ۲۳</small>
+        </div>
+
+        <!-- قد و وزن -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>📏 قد (سانتی‌متر)</label>
+                <input type="number" id="height" placeholder="مثال: ۱۷۵">
+            </div>
+            <div class="field-group">
+                <label>⚖️ وزن (کیلوگرم)</label>
+                <input type="number" id="weight" placeholder="مثال: ۷۰">
+            </div>
+        </div>
+
+        <!-- شغل پدر و مادر -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>👨‍💼 شغل پدر</label>
+                <input type="text" id="fatherJob" placeholder="مثال: بازنشسته، کارمند، کشاورز">
+            </div>
+            <div class="field-group">
+                <label>👩‍💼 شغل مادر</label>
+                <input type="text" id="motherJob" placeholder="مثال: خانه‌دار، معلم">
+            </div>
+        </div>
+
+        <!-- رنگ صورت و چشم -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>🎨 رنگ پوست</label>
+                <select id="skinColor">
+                    <option value="">انتخاب کنید</option>
+                    <option value="سفید">سفید</option>
+                    <option value="گندمی">گندمی</option>
+                    <option value="سبزه">سبزه</option>
+                    <option value="قهوه‌ای">قهوه‌ای</option>
+                </select>
+            </div>
+            <div class="field-group">
+                <label>👁️ رنگ چشم</label>
+                <select id="eyeColor">
+                    <option value="">انتخاب کنید</option>
+                    <option value="مشکی">مشکی</option>
+                    <option value="قهوه‌ای">قهوه‌ای</option>
+                    <option value="فندقی">فندقی</option>
+                    <option value="سبز">سبز</option>
+                    <option value="آبی">آبی</option>
+                </select>
+            </div>
+        </div>
+<!-- نوع پوشش -->
+        <div class="field-group">
+            <label>🧥 نوع پوشش</label>
+            <select id="dressCode">
+                <option value="">انتخاب کنید</option>
+                <option value="خیلی مذهبی">خیلی مذهبی</option>
+                <option value="مذهبی معمولی">مذهبی معمولی</option>
+                <option value="سنتی">سنتی</option>
+                <option value="مدرن">مدرن</option>
+            </select>
+        </div>
+
+        <!-- شغل -->
+        <div class="field-group">
+            <label>💼 شغل <span class="required-star">*</span></label>
+            <select id="jobType" required>
+                <option value="" disabled selected>نوع شغل خود را انتخاب کنید</option>
+                <option value="کارمند نیمه خصوصی">کارمند نیمه خصوصی</option>
+                <option value="کارمند دولتی">کارمند دولتی</option>
+                <option value="آزاد">آزاد</option>
+            </select>
+        </div>
+
+        <div id="jobDescriptionContainer" class="conditional-field">
+            <div class="field-group">
+                <label>📝 شرح شغل خود را بنویسید</label>
+                <textarea id="jobDescription" rows="2" placeholder="مثال: مدیر فروشگاه، مهندس نرم‌افزار، معلم، ..."></textarea>
+            </div>
+        </div>
+
+        <!-- وضعیت جسمی -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>💪 وضعیت جسمی <span class="required-star">*</span></label>
+                <select id="physicalStatus" required>
+                    <option value="" disabled selected>انتخاب کنید</option>
+                    <option value="سالم">سالم</option>
+                    <option value="معلول">معلول</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="disabilityContainer" class="conditional-field hidden">
+            <div class="field-group">
+                <label>📝 توضیحات معلولیت</label>
+                <textarea id="disabilityDesc" rows="2" placeholder="لطفاً توضیح دهید..."></textarea>
+            </div>
+        </div>
+
+        <!-- اهل دخانیات -->
+        <div class="field-group">
+            <label>🚬 اهل دخانیات هستید؟</label>
+            <select id="smoking">
+                <option value="">انتخاب کنید</option>
+                <option value="خیر">خیر</option>
+                <option value="بله، سیگار">بله، سیگار</option>
+                <option value="بله، قلیان">بله، قلیان</option>
+                <option value="بله، هر دو">بله، هر دو</option>
+            </select>
+        </div>
+
+        <!-- تعداد افراد خانواده و فرزند چندم -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>👨‍👩‍👧‍👦 تعداد افراد خانواده (شامل شما)</label>
+                <input type="number" id="familyCount" min="1" max="20" placeholder="مثال: ۵">
+            </div>
+            <div class="field-group">
+                <label>🔢 فرزند چندم هستید؟</label>
+                <input type="number" id="childOrder" min="1" max="20" placeholder="مثال: ۲">
+            </div>
+        </div>
+
+        <!-- محل سکونت -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>📍 استان محل سکونت</label>
+                <input type="text" id="province" placeholder="مثال: تهران، اصفهان، خراسان رضوی">
+            </div>
+            <div class="field-group">
+                <label>🏙️ شهرستان</label>
+                <input type="text" id="city" placeholder="مثال: مشهد">
+            </div>
+        </div>
+        <div class="field-group">
+            <label>🏡 روستا/محله</label>
+            <input type="text" id="village" placeholder="در صورت روستا یا محله خاص">
+        </div>
+
+        <!-- شماره تماس -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>📞 شماره تماس ۱ <span class="required-star">*</span></label>
+<input type="tel" id="phone1" placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹" required>
+                <small style="color:#666; font-size:0.7rem;">۱۱ رقم و با ۰۹ شروع شود</small>
+            </div>
+            <div class="field-group">
+                <label>📞 شماره تماس ۲</label>
+                <input type="tel" id="phone2" placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹">
+            </div>
+        </div>
+
+        <!-- خصوصیات اخلاقی -->
+        <div class="field-group">
+            <label>✨ خصوصیات اخلاقی</label>
+            <textarea id="moralFeatures" rows="2" placeholder="مثال: صبور، خوش‌برخورد، آرام، منظم ..."></textarea>
+        </div>
+
+        <!-- معیارهای همسر مورد نظر -->
+        <div class="field-group">
+            <label>💍 معیارهای همسر مورد نظر</label>
+            <textarea id="spouseCriteria" rows="2" placeholder="مثال: متدین، شغل ثابت، قد بلند ..."></textarea>
+        </div>
+
+        <!-- سابقه ازدواج -->
+        <div class="field-group">
+            <label>💍 سابقه ازدواج <span class="required-star">*</span></label>
+            <select id="marriageHistory" required>
+                <option value="" disabled selected>انتخاب کنید</option>
+                <option value="مجرد و بدون سابقه ازدواج">مجرد و بدون سابقه ازدواج</option>
+                <option value="مطلقه - در دوران نامزدی جدا شدم">مطلقه - در دوران نامزدی جدا شدم</option>
+                <option value="مطلقه - بدون فرزند هستم">مطلقه - بدون فرزند هستم</option>
+                <option value="مطلقه - دارای فرزند هستم">مطلقه - دارای فرزند هستم</option>
+                <option value="مطلقه - همسر قبلی در قید حیات هستند">مطلقه - همسر قبلی در قید حیات هستند</option>
+                <option value="همسر فوت شده">همسر فوت شده</option>
+            </select>
+        </div>
+
+        <div id="marriageDetailsContainer" class="conditional-field hidden">
+            <div class="field-group">
+                <label>📝 توضیحات تکمیلی تأهل</label>
+                <textarea id="marriageDetails" rows="2" placeholder="در صورت نیاز توضیح بیشتری بدهید..."></textarea>
+            </div>
+        </div>
+
+        <!-- استان‌های پذیرش همسر -->
+        <div class="field-group">
+            <label>🗺️ از کدام استان‌ها همسر می‌پذیرید؟</label>
+            <textarea id="acceptedProvinces" rows="2" placeholder="مثال: تهران، اصفهان، خراسان رضوی"></textarea>
+        </div>
+
+        <!-- مشاغل مورد قبول -->
+        <div class="field-group">
+            <label>💼 با صاحبان کدام مشاغل ازدواج می‌کنید؟ <span class="required-star">*</span></label>
+            <select id="acceptedJobs" required>
+                <option value="" disabled selected>انتخاب کنید</option>
+                <option value="محدودیتی ندارم">محدودیتی ندارم</option>
+                <option value="فقط روحانی می‌پذیرم">فقط روحانی می‌پذیرم</option>
+                <option value="فقط نظامی می‌پذیرم">فقط نظامی می‌پذیرم</option>
+                <option value="فقط کارمند می‌پذیرم">فقط کارمند می‌پذیرم</option>
+                <option value="فقط شغل آزاد می‌پذیرم">فقط شغل آزاد می‌پذیرم</option>
+            </select>
+        </div>
+
+        <!-- اختلاف سنی مطلوب -->
+        <div class="field-group">
+            <label>📊 اختلاف سنی مطلوب با همسر آینده</label>
+            <select id="ageDifference">
+                <option value="">انتخاب کنید</option>
+                <option value="همسن می‌پذیرم">همسن می‌پذیرم</option>
+                <option value="اختلاف سنی حداقل ۲ تا ۵ سال">اختلاف سنی حداقل ۲ تا ۵ سال</option>
+                <option value="اختلاف سنی حداقل ۶ تا ۱۰ سال">اختلاف سنی حداقل ۶ تا ۱۰ سال</option>
+                <option value="بزرگتر می‌پذیرم">بزرگتر می‌پذیرم</option>
+            </select>
+        </div>
+
+        <!-- حداقل تحصیلات مطلوب همسر -->
+        <div class="field-group">
+            <label>🎓 حداقل تحصیلات مطلوب همسر آینده</label>
+<select id="minEducation">
+                <option value="">انتخاب کنید</option>
+                <option value="اهمیت ندارد">اهمیت ندارد</option>
+                <option value="کم سواد">کم سواد</option>
+                <option value="دیپلم">دیپلم</option>
+                <option value="فوق دیپلم">فوق دیپلم</option>
+                <option value="لیسانس">لیسانس</option>
+                <option value="فوق لیسانس">فوق لیسانس</option>
+                <option value="دکترا">دکترا</option>
+            </select>
+        </div>
+
+        <!-- وضعیت تحصیل -->
+        <div class="field-group">
+            <label>🎓 وضعیت تحصیل</label>
+            <select id="educationStatus">
+                <option value="">انتخاب کنید</option>
+                <option value="زیر دیپلم">زیر دیپلم</option>
+                <option value="دیپلم">دیپلم</option>
+                <option value="فوق دیپلم">فوق دیپلم</option>
+                <option value="لیسانس">لیسانس</option>
+                <option value="فوق لیسانس">فوق لیسانس</option>
+                <option value="دکترا">دکترا</option>
+                <option value="دانشجو">دانشجو</option>
+            </select>
+        </div>
+
+        <!-- میزان درآمد -->
+        <div class="field-group">
+            <label>💰 میزان درآمد (ماهیانه - تومان)</label>
+            <input type="text" id="monthlyIncome" placeholder="مثال: ۱۲,۰۰۰,۰۰۰">
+        </div>
+
+        <!-- وضعیت دارایی -->
+        <div class="row-2col">
+            <div class="field-group">
+                <label>🏠 وضعیت دارایی - خانه</label>
+                <select id="hasHouse">
+                    <option value="">انتخاب کنید</option>
+                    <option value="دارم">دارم</option>
+                    <option value="ندارم">ندارم</option>
+                </select>
+            </div>
+            <div class="field-group">
+                <label>🚗 وضعیت دارایی - ماشین</label>
+                <select id="hasCar">
+                    <option value="">انتخاب کنید</option>
+                    <option value="دارم">دارم</option>
+                    <option value="ندارم">ندارم</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- توضیحات تکمیلی -->
+        <div class="field-group">
+            <label>📝 توضیحات تکمیلی</label>
+            <textarea id="additionalNotes" rows="2" placeholder="هر مطلب دیگری که مد نظر دارید..."></textarea>
+        </div>
+
+        <!-- آیدی فضای مجازی -->
+        <div class="field-group">
+            <label>🆔 آیدی ایتا <span class="required-star">*</span></label>
+            <input type="text" id="eitaaId" placeholder="@yourusername" required>
+        </div>
+        <div class="field-group">
+            <label>🆔 آیدی بله</label>
+            <input type="text" id="baleId" placeholder="@yourusername">
+        </div>
+        <div class="field-group">
+            <label>🆔 آیدی سروش</label>
+            <input type="text" id="soroushId" placeholder="@yourusername">
+        </div>
+        <div class="field-group">
+            <label>🆔 آیدی روبیکا</label>
+            <input type="text" id="rubikaId" placeholder="@yourusername">
+        </div>
+
+        <!-- نحوه ارتباط -->
+        <div class="field-group">
+            <label>📱 نحوه ارتباط با شما <span class="required-star">*</span></label>
+            <select id="contactMethod" required>
+                <option value="" disabled selected>انتخاب کنید</option>
+                <option value="تماس تلفنی">تماس تلفنی</option>
+                <option value="پیامک">پیامک</option>
+                <option value="ایتا">ایتا</option>
+                <option value="بله">بله</option>
+                <option value="سروش">سروش</option>
+                <option value="روبیکا">روبیکا</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">✓ ثبت اطلاعات در پیوند مودت</button>
+        
+        <!-- دکمه مشاهده کاربران -->
+        <button type="button" id="viewUsersBtn" class="btn-view-users">👥 مشاهده کاربران</button>
+<!-- بخش نمایش لیست کاربران -->
+        <div id="usersListContainer" class="users-list-container" style="display: none;">
+            <h3>📋 لیست کاربران همسریابی</h3>
+            <div id="usersList" class="users-list"></div>
+            <button type="button" id="closeUsersList" class="btn-close">❌ بستن</button>
+        </div>
+
+        <div id="formMessage" class="message-area"></div>
+        <div id="previewData" class="preview-card" style="display:none;"></div>
+
+        <!-- دعوت به کانال ایتا (آخرین قسمت) -->
+        <div class="eitaa-invite">
+            <p>📢 جهت اطلاع از اخبار و برنامه‌ها در کانال <strong>پیوند مودّت</strong> در ایتا عضو شوید:</p>
+            <a href="https://eitaa.com/mardomnahadddd" target="_blank" class="eitaa-link">🔗 لینک کانال پیوند مودّت در ایتا</a>
+        </div>
+    </form>
+    <footer>
+        تمامی اطلاعات با حفظ حریم شخصی پردازش می‌شود | گروه همسریابی پیوند مودت
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

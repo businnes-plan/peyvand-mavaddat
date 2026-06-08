@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tahoma', 'Vazir', 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #0a2e4d 0%, #0a3b5e 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    direction: rtl;
+}
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px black;
+    overflow: hidden;
+}
+
+.form-header {
+    background: linear-gradient(135deg, #0a4c6e, #0a3b5e);
+    color: white;
+    padding: 30px 25px;
+    text-align: center;
+}
+
+.form-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.register-form {
+    padding: 30px 25px;
+}
+
+.row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.row-3col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.field-group {
+    margin-bottom: 20px;
+}
+
+.field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1a4c6e;
+    font-size: 0.9rem;
+}
+
+.required-star {
+    color: #e74c3c;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e8f0;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fefefe;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+    outline: none;
+    border-color: #0a6e8a;
+    box-shadow: 0 0 0 3px rgba(10, 110, 138, 0.2);
+}
+
+.field-group textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.conditional-field {
+    margin-bottom: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-submit, .btn-view-users {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0a6e8a, #0a4c6e);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-submit:hover, .btn-view-users:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(10, 76, 110, 0.3);
+    background: linear-gradient(135deg, #0a7e9a, #0a5c7e);
+}
+
+.message-area {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.message-area.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.message-area.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.preview-card, .users-list-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f0f7fc;
+    border-radius: 20px;
+    border-right: 5px solid #0a6e8a;
+    font-size: 0.85rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.users-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.user-card {
+    background: white;
+    padding: 15px;
+    border-radius: 16px;
+    border-right: 4px solid #0a6e8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.user-card .user-code {
+    font-weight: bold;
+    color: #0a6e8a;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.eitaa-invite {
+    margin-top: 30px;
+    padding: 20px;
+    background: #eef5f9;
+    border-radius: 20px;
+    text-align: center;
+    border-right: 4px solid #0a6e8a;
+}
+
+.eitaa-link {
+    display: inline-block;
+    background: #0a6e8a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.eitaa-link:hover {
+    background: #0a4c6e;
+    transform: translateY(-2px);
+}
+
+.btn-close {
+    display: block;
+    margin: 15px auto 0;
+    padding: 8px 20px;
+    background: #cbd5e0;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #f8fafc;
+    font-size: 0.75rem;
+    color: #5a6874;
+    border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 640px) {
+    .row-2col, .row-3col {
+        grid-template-columns: 1fr;
+    }
+}
