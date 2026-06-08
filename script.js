@@ -120,15 +120,14 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
     }
 
     // ========== لینک Web App (این رو با لینک خودت جایگزین کن) ==========
-    const WEB_APP_URL = "https://script.google.com/macros/s/YOUR_TOKEN/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzguSJxuZx5GIQUA-Y-LPSIgVHKkbC9OxuGfrXQ4eqKcczN00FLtwMp4cdkI7PYuGex6g/exec";
 
     // ========== ثبت اطلاعات ==========
     function submitFormData(formData) {
         const age = calculateAge(formData.birthYear, formData.birthMonth, formData.birthDay);
         if (age < 18) return showMessage('❌ سن باید حداقل ۱۸ سال باشد!', true);
         if (!validatePhone(formData.phone1)) return showMessage('❌ شماره تماس اول صحیح نیست', true);
-        if (!formData.eitaaId) return showMessage('❌ آیدی ایتا الزامی است', true);
-        
+        if (!formData.eitaaId) return showMessage('❌ آیدی ایتا الزامی است', true);        
         fetch(WEB_APP_URL, {
             method: 'POST',
             mode: 'no-cors',
