@@ -1,166 +1,31 @@
 
+// ========== کد کامل و نهایی script.js برای سایت پیوند مودت ==========
 document.addEventListener('DOMContentLoaded', function () {
-    // ========== مدیریت فیلدهای شرطی ==========
-    const physicalStatus = document.getElementById('physicalStatus');
-    const disabilityContainer = document.getElementById('disabilityContainer');
-    if (physicalStatus) {
-        physicalStatus.addEventListener('change', function () {
-            if (this.value === 'معلول') disabilityContainer.classList.remove('hidden');
-            else disabilityContainer.classList.add('hidden');
-        });
-    }
+    console.log("script.js بارگذاری شد");
 
-    const marriageHistory = document.getElementById('marriageHistory');
-    const marriageDetailsContainer = document.getElementById('marriageDetailsContainer');
-    if (marriageHistory) {
-        marriageHistory.addEventListener('change', function () {
-            if (this.value !== 'مجرد و بدون سابقه ازدواج' && this.value !== '')
-                marriageDetailsContainer.classList.remove('hidden');
-            else marriageDetailsContainer.classList.add('hidden');
-        });
-    }
-
-    // ========== توابع کمکی ==========
-    function convertPersianToGregorian(year, month, day) {
-        let gYear = parseInt(year) - 621;
-        let gMonth = parseInt(month) + 3;
-        let gDay = parseInt(day) + 20;
-        if (gMonth > 12) {
-            gYear++;
-            gMonth -= 12;
-        }
-        return new Date(gYear, gMonth - 1, gDay);
-    }
-
-    function calculateAge(year, month, day) {
-        if (!year || !month || !day) return null;
-        const birth = convertPersianToGregorian(year, month, day);
-        const today = new Date();
-        let age = today.getFullYear() - birth.getFullYear();
-        const m = today.getMonth() - birth.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-        return age;
-    }
-
-    function validatePhone(phone) {
-        return /^09[0-9]{9}$/.test(phone);
-    }
-
-    // ========== دریافت اطلاعات فرم ==========
-    function getFormData() {
-        return {
-            gender: document.getElementById('gender')?.value || '',
-            firstName: document.getElementById('firstName')?.value.trim() || '',
-            lastName: document.getElementById('lastName')?.value.trim() || '',
-            birthYear: document.getElementById('birthYear')?.value || '',
-            birthMonth: document.getElementById('birthMonth')?.value || '',
-            birthDay: document.getElementById('birthDay')?.value || '',
-            height: document.getElementById('height')?.value || '',
-            weight: document.getElementById('weight')?.value || '',
-            fatherJob: document.getElementById('fatherJob')?.value.trim() || '',
-            motherJob: document.getElementById('motherJob')?.value.trim() || '',
-            skinColor: document.getElementById('skinColor')?.value || '',
-            eyeColor: document.getElementById('eyeColor')?.value || '',
-            dressCode: document.getElementById('dressCode')?.value || '',
-            jobType: document.getElementById('jobType')?.value || '',
-            jobDescription: document.getElementById('jobDescription')?.value.trim() || '',
-            physicalStatus: document.getElementById('physicalStatus')?.value || '',
-            disabilityDesc: document.getElementById('disabilityDesc')?.value.trim() || '',
-            smoking: document.getElementById('smoking')?.value || '',
-            familyCount: document.getElementById('familyCount')?.value || '',
-            childOrder: document.getElementById('childOrder')?.value || '',
-            province: document.getElementById('province')?.value.trim() || '',
-            city: document.getElementById('city')?.value.trim() || '',
-            village: document.getElementById('village')?.value.trim() || '',
-            phone1: document.getElementById('phone1')?.value.trim() || '',
-            phone2: document.getElementById('phone2')?.value.trim() || '',
-moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
-            spouseCriteria: document.getElementById('spouseCriteria')?.value.trim() || '',
-            marriageHistory: document.getElementById('marriageHistory')?.value || '',
-            marriageDetails: document.getElementById('marriageDetails')?.value.trim() || '',
-            acceptedProvinces: document.getElementById('acceptedProvinces')?.value.trim() || '',
-            acceptedJobs: document.getElementById('acceptedJobs')?.value || '',
-            ageDifference: document.getElementById('ageDifference')?.value || '',
-            minEducation: document.getElementById('minEducation')?.value || '',
-            educationStatus: document.getElementById('educationStatus')?.value || '',
-            monthlyIncome: document.getElementById('monthlyIncome')?.value.trim() || '',
-            hasHouse: document.getElementById('hasHouse')?.value || '',
-            hasCar: document.getElementById('hasCar')?.value || '',
-            additionalNotes: document.getElementById('additionalNotes')?.value.trim() || '',
-            eitaaId: document.getElementById('eitaaId')?.value.trim() || '',
-            baleId: document.getElementById('baleId')?.value.trim() || '',
-            soroushId: document.getElementById('soroushId')?.value.trim() || '',
-            rubikaId: document.getElementById('rubikaId')?.value.trim() || '',
-            contactMethod: document.getElementById('contactMethod')?.value || ''
-        };
-    }
-
-    function showMessage(msg, isError = false) {
-        const div = document.getElementById('formMessage');
-        div.textContent = msg;
-        div.className = message-area ${isError ? 'error' : 'success'};
-        setTimeout(() => {
-            div.className = 'message-area';
-            div.textContent = '';
-        }, 5000);
-    }
-
-    function showPreview(data) {
-        const previewDiv = document.getElementById('previewData');
-        const age = calculateAge(data.birthYear, data.birthMonth, data.birthDay);
-        previewDiv.innerHTML = 
-            <h3>📋 خلاصه اطلاعات ثبت شده</h3>
-            <p>👤 نام: ${data.firstName} ${data.lastName}</p>
-            <p>🧑 جنسیت: ${data.gender}</p>
-            <p>🎂 تاریخ تولد: ${data.birthYear}/${data.birthMonth}/${data.birthDay} ${age ? (سن: ${age} سال) : ''}</p>
-            <p>📞 شماره تماس: ${data.phone1} ${data.phone2 ? و ${data.phone2} : ''}</p>
-            <p>🆔 آیدی ایتا: ${data.eitaaId}</p>
-        ;
-        previewDiv.style.display = 'block';
-    }
-
-    // ========== لینک Web App (این رو با لینک خودت جایگزین کن) ==========
+    // ⚠️ مهم: لینک Web App خودت رو اینجا بذار (لینکی که «وب اپ اوکی» نوشت)
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcNCoZd8DzXcArQBzMBAdGiN1UtBg295n5r2bos_873Jzw2gMASBrxuMZP_ZbaRmEdbQ/exec";
 
-    // ========== ثبت اطلاعات ==========
-    function submitFormData(formData) {
-        const age = calculateAge(formData.birthYear, formData.birthMonth, formData.birthDay);
-        if (age < 18) return showMessage('❌ سن باید حداقل ۱۸ سال باشد!', true);
-        if (!validatePhone(formData.phone1)) return showMessage('❌ شماره تماس اول صحیح نیست', true);
-        if (!formData.eitaaId) return showMessage('❌ آیدی ایتا الزامی است', true);        
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ data: JSON.stringify(formData) })
-        }).then(() => {
-            showMessage('✅ اطلاعات شما با موفقیت ثبت شد!', false);
-            document.getElementById('userInfoForm').reset();
-            document.getElementById('previewData').style.display = 'none';
-        }).catch(() => showMessage('❌ خطا در ارتباط با سرور', true));
-        
-        showPreview(formData);
-        return true;
-    }
+    // ========== عناصر دکمه مشاهده کاربران ==========
+    const viewUsersBtn = document.getElementById('viewUsersBtn');
+    const usersListContainer = document.getElementById('usersListContainer');
+    const usersListDiv = document.getElementById('usersList');
+    const closeUsersList = document.getElementById('closeUsersList');
 
-    document.getElementById('userInfoForm')?.addEventListener('submit', function (e) {
-        e.preventDefault();
-        submitFormData(getFormData());
-    });
-// ========== نمایش لیست کاربران برای عموم ==========
-    const viewBtn = document.getElementById('viewUsersBtn');
-    const listContainer = document.getElementById('usersListContainer');
-    const usersDiv = document.getElementById('usersList');
-    const closeBtn = document.getElementById('closeUsersList');
-
+    // ========== تابع بارگذاری لیست کاربران ==========
     function loadUsers() {
-        usersDiv.innerHTML = '<div>در حال بارگذاری...</div>';
-        listContainer.style.display = 'block';
+        if (!usersListDiv) {
+            console.error("عنصر usersListDiv پیدا نشد");
+            return;
+        }
+        usersListDiv.innerHTML = '<div>در حال بارگذاری...</div>';
+        usersListContainer.style.display = 'block';
+
         fetch(${WEB_APP_URL}?action=getPublicUsers)
-            .then(res => res.json())
+            .then(response => response.json())
             .then(data => {
                 if (!data.length) {
-                    usersDiv.innerHTML = '<div>هنوز کاربری ثبت نشده است.</div>';
+                    usersListDiv.innerHTML = '<div>هنوز کاربری ثبت نشده است.</div>';
                     return;
                 }
                 let html = '';
@@ -179,15 +44,28 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
                         </div>
                     ;
                 });
-                usersDiv.innerHTML = html;
+                usersListDiv.innerHTML = html;
             })
-            .catch(() => usersDiv.innerHTML = '<div style="color:red;">خطا در دریافت اطلاعات</div>');
+            .catch(error => {
+                usersListDiv.innerHTML = '<div style="color:red;">خطا در دریافت اطلاعات</div>';
+                console.error("خطا در fetch:", error);
+            });
     }
 
-    viewBtn?.addEventListener('click', loadUsers);
-    closeBtn?.addEventListener('click', () => listContainer.style.display = 'none');
+    // ========== اتصال رویداد به دکمه‌ها ==========
+    if (viewUsersBtn) {
+        viewUsersBtn.addEventListener('click', loadUsers);
+    } else {
+        console.error("دکمه viewUsersBtn پیدا نشد");
+    }
 
-    // ========== پنل ادمین ==========
+    if (closeUsersList) {
+        closeUsersList.addEventListener('click', () => usersListContainer.style.display = 'none');
+    } else {
+        console.error("دکمه closeUsersList پیدا نشد");
+    }
+
+    // ========== پنل ادمین (در صورت وجود) ==========
     const adminLoginBtn = document.getElementById('adminLoginBtn');
     const adminLoginBox = document.getElementById('adminLoginBox');
     const submitAdminLogin = document.getElementById('submitAdminLogin');
@@ -199,8 +77,8 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
 
     if (adminLoginBtn) {
         adminLoginBtn.addEventListener('click', function() {
-            adminLoginBox.style.display = 'block';
-            adminPanel.style.display = 'none';
+            if (adminLoginBox) adminLoginBox.style.display = 'block';
+            if (adminPanel) adminPanel.style.display = 'none';
             if (adminMessage) adminMessage.innerHTML = '';
             if (adminPasswordInput) adminPasswordInput.value = '';
         });
@@ -208,7 +86,7 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
 
     if (submitAdminLogin) {
         submitAdminLogin.addEventListener('click', function() {
-            const password = adminPasswordInput.value;
+const password = adminPasswordInput ? adminPasswordInput.value : '';
             if (!password) {
                 if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">لطفاً رمز را وارد کنید</span>';
                 return;
@@ -227,7 +105,7 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
                     
                     if (!data.length) {
                         if (adminUsersList) adminUsersList.innerHTML = '<div>هیچ کاربری ثبت نشده است</div>';
-} else {
+                    } else {
                         let html = '';
                         for (let i = 0; i < data.length; i++) {
                             const u = data[i];
@@ -262,11 +140,13 @@ moralFeatures: document.getElementById('moralFeatures')?.value.trim() || '',
         });
     }
 
-    // ========== شماره تماس فقط عدد ==========
+    // ========== فرمت شماره تماس (فقط عدد) ==========
     ['phone1', 'phone2'].forEach(id => {
         const inp = document.getElementById(id);
-        inp?.addEventListener('input', function () {
-            this.value = this.value.replace(/\D/g, '').slice(0, 11);
-        });
+        if (inp) {
+            inp.addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '').slice(0, 11);
+            });
+        }
     });
 });
