@@ -3,16 +3,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log("script.js بارگذاری شد");
 
-    // ⚠️ مهم: لینک Web App خودت رو اینجا بذار (لینکی که «وب اپ اوکی» نوشت)
+    // ⚠️ لینک Web App خودت رو اینجا بذار (لینکی که «وب اپ اوکی» نوشت)
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcNCoZd8DzXcArQBzMBAdGiN1UtBg295n5r2bos_873Jzw2gMASBrxuMZP_ZbaRmEdbQ/exec";
 
-    // ========== عناصر دکمه مشاهده کاربران ==========
+    // ========== دکمه مشاهده کاربران ==========
     const viewUsersBtn = document.getElementById('viewUsersBtn');
     const usersListContainer = document.getElementById('usersListContainer');
     const usersListDiv = document.getElementById('usersList');
     const closeUsersList = document.getElementById('closeUsersList');
 
-    // ========== تابع بارگذاری لیست کاربران ==========
     function loadUsers() {
         if (!usersListDiv) {
             console.error("عنصر usersListDiv پیدا نشد");
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // ========== اتصال رویداد به دکمه‌ها ==========
     if (viewUsersBtn) {
         viewUsersBtn.addEventListener('click', loadUsers);
     } else {
@@ -61,11 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (closeUsersList) {
         closeUsersList.addEventListener('click', () => usersListContainer.style.display = 'none');
-    } else {
-        console.error("دکمه closeUsersList پیدا نشد");
     }
 
-    // ========== پنل ادمین (در صورت وجود) ==========
+    // ========== پنل ادمین ==========
     const adminLoginBtn = document.getElementById('adminLoginBtn');
     const adminLoginBox = document.getElementById('adminLoginBox');
     const submitAdminLogin = document.getElementById('submitAdminLogin');
@@ -86,10 +82,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (submitAdminLogin) {
         submitAdminLogin.addEventListener('click', function() {
-const password = adminPasswordInput ? adminPasswordInput.value : '';
+            const password = adminPasswordInput ? adminPasswordInput.value : '';
             if (!password) {
                 if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">لطفاً رمز را وارد کنید</span>';
-                return;
+return;
             }
             
             if (adminMessage) adminMessage.innerHTML = '<span style="color:blue;">در حال بررسی...</span>';
