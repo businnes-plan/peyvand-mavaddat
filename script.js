@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("script.js بارگذاری شد");
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcNCoZd8DzXcArQBzMBAdGiN1UtBg295n5r2bos_873Jzw2gMASBrxuMZP_ZbaRmEdbQ/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxTYL01lrq8ohVkXTMOp4B8zMRlV__hcUkChv2rcruiEC-tZQVLmc3_K5fRS7Pgkno1cw/exec";
 
     const viewUsersBtn = document.getElementById('viewUsersBtn');
     const usersListContainer = document.getElementById('usersListContainer');
