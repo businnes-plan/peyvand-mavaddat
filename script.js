@@ -1,26 +1,21 @@
 
-// ========== کد کامل و نهایی script.js برای سایت پیوند مودت ==========
-document.addEventListener('DOMContentLoaded', function () {
+// ========== کد نهایی و کاملاً سالم script.js ==========
+document.addEventListener('DOMContentLoaded', function() {
     console.log("script.js بارگذاری شد");
 
-    // ⚠️ لینک Web App خودت رو اینجا بذار (لینکی که «وب اپ اوکی» نوشت)
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcNCoZd8DzXcArQBzMBAdGiN1UtBg295n5r2bos_873Jzw2gMASBrxuMZP_ZbaRmEdbQ/exec";
 
-    // ========== دکمه مشاهده کاربران ==========
     const viewUsersBtn = document.getElementById('viewUsersBtn');
     const usersListContainer = document.getElementById('usersListContainer');
     const usersListDiv = document.getElementById('usersList');
     const closeUsersList = document.getElementById('closeUsersList');
 
     function loadUsers() {
-        if (!usersListDiv) {
-            console.error("عنصر usersListDiv پیدا نشد");
-            return;
-        }
+        if (!usersListDiv) return;
         usersListDiv.innerHTML = '<div>در حال بارگذاری...</div>';
-        usersListContainer.style.display = 'block';
+        if (usersListContainer) usersListContainer.style.display = 'block';
 
-        fetch(${WEB_APP_URL}?action=getPublicUsers)
+        fetch(WEB_APP_URL + '?action=getPublicUsers')
             .then(response => response.json())
             .then(data => {
                 if (!data.length) {
@@ -47,21 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 usersListDiv.innerHTML = '<div style="color:red;">خطا در دریافت اطلاعات</div>';
-                console.error("خطا در fetch:", error);
+                console.error(error);
             });
     }
 
-    if (viewUsersBtn) {
-        viewUsersBtn.addEventListener('click', loadUsers);
-    } else {
-        console.error("دکمه viewUsersBtn پیدا نشد");
-    }
+    if (viewUsersBtn) viewUsersBtn.addEventListener('click', loadUsers);
+    if (closeUsersList) closeUsersList.addEventListener('click', () => usersListContainer.style.display = 'none');
 
-    if (closeUsersList) {
-        closeUsersList.addEventListener('click', () => usersListContainer.style.display = 'none');
-    }
-
-    // ========== پنل ادمین ==========
     const adminLoginBtn = document.getElementById('adminLoginBtn');
     const adminLoginBox = document.getElementById('adminLoginBox');
     const submitAdminLogin = document.getElementById('submitAdminLogin');
@@ -72,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const adminPasswordInput = document.getElementById('adminPassword');
 
     if (adminLoginBtn) {
-        adminLoginBtn.addEventListener('click', function() {
+        adminLoginBtn.addEventListener('click', () => {
             if (adminLoginBox) adminLoginBox.style.display = 'block';
             if (adminPanel) adminPanel.style.display = 'none';
             if (adminMessage) adminMessage.innerHTML = '';
@@ -81,30 +68,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (submitAdminLogin) {
-        submitAdminLogin.addEventListener('click', function() {
+        submitAdminLogin.addEventListener('click', () => {
             const password = adminPasswordInput ? adminPasswordInput.value : '';
             if (!password) {
                 if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">لطفاً رمز را وارد کنید</span>';
-return;
+                return;
             }
-            
             if (adminMessage) adminMessage.innerHTML = '<span style="color:blue;">در حال بررسی...</span>';
-            
-            fetch(${WEB_APP_URL}?action=getAdminData&password=${encodeURIComponent(password)})
+
+            fetch(WEB_APP_URL + '?action=getAdminData&password=' + encodeURIComponent(password))
                 .then(response => response.json())
                 .then(data => {
-                    if (data.error) {
+if (data.error) {
                         if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">' + data.error + '</span>';
                         if (adminPanel) adminPanel.style.display = 'none';
                         return;
                     }
-                    
                     if (!data.length) {
                         if (adminUsersList) adminUsersList.innerHTML = '<div>هیچ کاربری ثبت نشده است</div>';
                     } else {
                         let html = '';
-                        for (let i = 0; i < data.length; i++) {
-                            const u = data[i];
+                        data.forEach(u => {
                             html += 
                                 <div class="user-card">
                                     <div class="user-code">🔹 ${u.code || 'کاربر'}</div>
@@ -116,7 +100,7 @@ return;
                                     <p>🆔 ایتا: ${u.eitaaId || '-'}</p>
                                 </div>
                             ;
-                        }
+                        });
                         if (adminUsersList) adminUsersList.innerHTML = html;
                     }
                     if (adminPanel) adminPanel.style.display = 'block';
@@ -125,22 +109,21 @@ return;
                 })
                 .catch(error => {
                     if (adminMessage) adminMessage.innerHTML = '<span style="color:red;">خطا در ارتباط با سرور</span>';
-                    console.error('Error:', error);
+                    console.error(error);
                 });
         });
     }
 
     if (closeAdminPanel) {
-        closeAdminPanel.addEventListener('click', function() {
+        closeAdminPanel.addEventListener('click', () => {
             if (adminPanel) adminPanel.style.display = 'none';
         });
     }
 
-    // ========== فرمت شماره تماس (فقط عدد) ==========
     ['phone1', 'phone2'].forEach(id => {
         const inp = document.getElementById(id);
         if (inp) {
-            inp.addEventListener('input', function () {
+            inp.addEventListener('input', function() {
                 this.value = this.value.replace(/\D/g, '').slice(0, 11);
             });
         }
