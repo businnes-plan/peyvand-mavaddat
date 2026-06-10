@@ -1,3 +1,4 @@
+consolo.log("js loaded");
 const API_URL = "https://script.google.com/macros/s/AKfycbxMShJwEu4UseiCkOv97kgv08gzmtT673zUsZbZJMP2Re6DuxZkkGbRzcld1zg2hZfx/exec";
 // =====================
 // ارسال فرم
