@@ -1,11 +1,13 @@
-consolo.log("js loaded");
+console.log("JS Loaded");
+
 const API_URL = "https://script.google.com/macros/s/AKfycbxMShJwEu4UseiCkOv97kgv08gzmtT673zUsZbZJMP2Re6DuxZkkGbRzcld1zg2hZfx/exec";
+
+
 // =====================
 // ارسال فرم
 // =====================
 async function submitForm() {
 
-    // اعتبارسنجی شماره
     const phoneRegex = /^09\d{9}$/;
 
     if (!phoneRegex.test(phone1.value)) {
@@ -18,7 +20,6 @@ async function submitForm() {
         return;
     }
 
-    // جمع‌آوری اطلاعات
     const data = {
         gender: gender.value,
         fullName: fullName.value,
@@ -85,7 +86,7 @@ async function submitForm() {
         });
 
         const result = await res.json();
-        alert("ثبت شد ✔ کد: " + result.code);
+        alert("ثبت شد ✔️ کد: " + result.code);
 
     } catch (err) {
         console.error(err);
@@ -95,7 +96,7 @@ async function submitForm() {
 
 
 // =====================
-// ورود ادمین ساده
+// ورود ادمین
 // =====================
 function adminLogin() {
     const pass = prompt("رمز ادمین:");
@@ -110,7 +111,7 @@ function adminLogin() {
 
 
 // =====================
-// گرفتن لیست کاربران (ادمین)
+// گرفتن لیست کاربران
 // =====================
 async function loadUsers() {
 
